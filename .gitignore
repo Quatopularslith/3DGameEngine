@@ -1,0 +1,8 @@
+project/project
+project/target
+project/build.properties
+.idea/
+*.iml
+target/
+classes/
+out/

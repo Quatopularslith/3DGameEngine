@@ -65,8 +65,8 @@ object NativesLoader {
   }
 
   private def move(lib: String): String = {
-    val source = Channels.newChannel(getClass.getResourceAsStream(""))
-    val fileOut = new File(destDir, "")
+    val source = Channels.newChannel(getClass.getResourceAsStream(lib))
+    val fileOut = new File(destDir, lib)
     val dest = new FileOutputStream(fileOut)
     dest.getChannel.transferFrom(source, 0, Long.MaxValue)
     source.close()

@@ -1,9 +1,13 @@
 package engine.input
 
-import engine.core.Engine
 import engine.window.Window
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.glfw.GLFWKeyCallback
+
+import KeyHandler.isKeyDown
+import KeyHandler.isKeyPressed
+import KeyHandler.isKeyReleased
+import KeyHandler.isKeyRepeated
 
 /**
   * Created by Mnenmenth Alkaborin
@@ -13,12 +17,15 @@ import org.lwjgl.glfw.GLFWKeyCallback
   */
 object KeyInput {
 
-  def setKeyCallBack(): Unit ={
-    glfwSetKeyCallback(Window.window, new GLFWKeyCallback {
-      override def invoke(l: Long, i: Int, i1: Int, i2: Int, i3: Int): Unit = {
+  def setKeyCallBack(): Unit = {
+    glfwSetKeyCallback(Window.window, KeyHandler)
+  }
 
-      }
-    })
+  def input(): Unit ={
+
+    if(isKeyDown(GLFW_KEY_W)) println("W")
+    if(isKeyDown(GLFW_KEY_S)) println("S")
+
   }
 
 }

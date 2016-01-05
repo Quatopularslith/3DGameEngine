@@ -1,6 +1,6 @@
 package engine.core
 
-import java.io.{FileOutputStream, File}
+import java.io.{File, FileOutputStream}
 import java.nio.channels.Channels
 import java.nio.file.{Files, Paths}
 
@@ -13,7 +13,7 @@ import java.nio.file.{Files, Paths}
 object NativesLoader {
 
   private def arch: String = {
-    if(System.getProperty("os.arch").contains("64"))
+    if (System.getProperty("os.arch").contains("64"))
       "64"
     else
       "32"
@@ -21,9 +21,9 @@ object NativesLoader {
 
   private def os: String = {
     val osName = System.getProperty("os.name").toLowerCase()
-    if(osName.contains("win"))
+    if (osName.contains("win"))
       "win"
-    else if(osName.contains("mac"))
+    else if (osName.contains("mac"))
       "mac"
     else
       "linux"
@@ -44,7 +44,7 @@ object NativesLoader {
   private val macDir = "/engine/natives/mac/"
   private val mac = List(macDir + "libglfw.dylib", macDir + "libjemalloc.dylib", macDir + "liblwjgl.dylib", macDir + "libopenal.dylib")
 
-  def load(): Unit ={
+  def load(): Unit = {
 
     os match {
       case "win" =>
@@ -67,7 +67,7 @@ object NativesLoader {
   System.setProperty("org.lwjgl.librarypath", destDir)
 
   private def move(lib: String): String = {
-    if(!Files.isDirectory(Paths.get(destDir)))Files.createDirectory(Paths.get(destDir))
+    if (!Files.isDirectory(Paths.get(destDir))) Files.createDirectory(Paths.get(destDir))
     val source = Channels.newChannel(NativesLoader.getClass.getClassLoader.getResourceAsStream(lib))
     val fileOut = new File(destDir, lib.split('/').last)
     val dest = new FileOutputStream(fileOut)

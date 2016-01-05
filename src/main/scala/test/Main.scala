@@ -11,6 +11,6 @@ import engine.core.{Engine, NativesLoader}
 object Main {
   def main(args: Array[String]) {
     NativesLoader.load()
-    Engine.run()
+    Engine.start()
   }
 }

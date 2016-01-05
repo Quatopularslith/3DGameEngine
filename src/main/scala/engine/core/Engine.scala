@@ -14,6 +14,7 @@ import org.lwjgl.glfw.GLFWErrorCallback
 object Engine {
 
   private var running = false
+  private val F_CAP = 60
 
   def start(): Unit = {
 
@@ -48,18 +49,53 @@ object Engine {
 
     Window.vsync(false)
 
+    var render = false
+    val frameTime = 1 / F_CAP
+    var lastTime = Time.getTime
+    var unprocessedTime: Double = 0
+
     while (running) {
       Window.update()
 
-      if(Window.isCloseRequested) stop()
+      var frames = 0
+      var frameCounter: Long = 0
+
+      val startTime = Time.getTime
+      val passedTime = startTime - lastTime
+      lastTime = startTime
+
+      unprocessedTime += passedTime / Time.second
+      frameCounter += passedTime
+
+      while(unprocessedTime > frameTime){
+        render = true
+        unprocessedTime -= frameTime
+        if(Window.isCloseRequested) stop()
+
+        if(frameCounter >= Time.second) {
+          println(frames)
+          frames = 0
+          frameCounter = 0
+        }
+
+      }
 
       KeyInput.input()
+
+      if(render){
+        render
+        frames += 1
+      } else Thread.sleep(1)
 
       KeyHandler.resetKeyStates()
       glfwPollEvents()
     }
 
     cleanUp()
+
+  }
+
+  private def render(): Unit ={
 
   }
 

@@ -12,10 +12,8 @@ import org.lwjgl.glfw.GLFWErrorCallback
   */
 object Engine {
 
-  var window: Window = _
-
   def start(): Unit ={
-    window = new Window
+    Window.createWindow(1280, 720, "3D Engine")
   }
 
   def stop(): Unit ={

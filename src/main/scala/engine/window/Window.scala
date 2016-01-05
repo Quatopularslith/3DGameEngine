@@ -7,7 +7,7 @@ import org.lwjgl.glfw.GLFW._
   * for licensing information
   * https://github.com/Mnenmenth
   */
-class Window {
+object Window {
 
   var window: Long = _
 

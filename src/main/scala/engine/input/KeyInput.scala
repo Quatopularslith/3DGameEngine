@@ -1,6 +1,7 @@
 package engine.input
 
 import engine.core.Engine
+import engine.window.Window
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.glfw.GLFWKeyCallback
 
@@ -13,7 +14,7 @@ import org.lwjgl.glfw.GLFWKeyCallback
 object KeyInput {
 
   def setKeyCallBack(): Unit ={
-    glfwSetKeyCallback(Engine.window, new GLFWKeyCallback {
+    glfwSetKeyCallback(Window.window, new GLFWKeyCallback {
       override def invoke(l: Long, i: Int, i1: Int, i2: Int, i3: Int): Unit = {
 
       }

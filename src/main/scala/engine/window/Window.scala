@@ -1,6 +1,6 @@
 package engine.window
 
-import engine.input.KeyHandler
+import engine.input.Input
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.glfw.GLFWVidMode
 
@@ -31,8 +31,14 @@ object Window {
       window = glfwCreateWindow(width, height, title, null.asInstanceOf[Long], null.asInstanceOf[Long])
     if (window != 0) window
     else {
-      sys.exit(); 0.asInstanceOf[Long]
+      sys.exit();
+      0.asInstanceOf[Long]
     }
+  }
+
+  def setTitle(title1: String): Unit = {
+    title = title1
+    glfwSetWindowTitle(window, title)
   }
 
   def showWindow() = glfwShowWindow(window)
@@ -40,7 +46,7 @@ object Window {
   def setWindowHint(hint: Int, bool: Int): Unit = glfwWindowHint(hint, bool)
 
   def centerWindow(): Unit = {
-    if(!fullScreen) {
+    if (!fullScreen) {
       var vidmode: GLFWVidMode = glfwGetVideoMode(glfwGetPrimaryMonitor())
       try {
         vidmode = glfwGetVideoMode(glfwGetWindowMonitor(window))
@@ -57,7 +63,7 @@ object Window {
 
   def update(): Unit = glfwSwapBuffers(window)
 
-  def isCloseRequested: Boolean = if(KeyHandler.isKeyPressed(GLFW_KEY_ESCAPE) || glfwWindowShouldClose(window) == GLFW_TRUE) true else false
+  def isCloseRequested: Boolean = if (Input.isKeyPressed(GLFW_KEY_ESCAPE) || glfwWindowShouldClose(window) == GLFW_TRUE) true else false
 
   def close(): Unit = glfwDestroyWindow(window)
 

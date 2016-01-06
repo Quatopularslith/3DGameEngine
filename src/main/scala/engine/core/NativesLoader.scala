@@ -46,6 +46,8 @@ object NativesLoader {
 
   def load(): Unit = {
 
+    if (!Files.isDirectory(Paths.get(destDir))) Files.createDirectory(Paths.get(destDir))
+
     os match {
       case "win" =>
         arch match {
@@ -61,13 +63,13 @@ object NativesLoader {
         mac.foreach(l => System.load(move(l)))
     }
 
+    System.setProperty("org.lwjgl.librarypath", destDir)
+
   }
 
   private val destDir = System.getProperty("java.io.tmpdir") + "/lwjglNatives/"
-  System.setProperty("org.lwjgl.librarypath", destDir)
 
   private def move(lib: String): String = {
-    if (!Files.isDirectory(Paths.get(destDir))) Files.createDirectory(Paths.get(destDir))
     val source = Channels.newChannel(NativesLoader.getClass.getClassLoader.getResourceAsStream(lib))
     val fileOut = new File(destDir, lib.split('/').last)
     val dest = new FileOutputStream(fileOut)
@@ -75,7 +77,7 @@ object NativesLoader {
     source.close()
     dest.close()
 
-    sys.addShutdownHook(fileOut.delete())
+    fileOut.deleteOnExit()
     println(lib.split('/').last + " loaded")
     fileOut.getAbsolutePath
   }

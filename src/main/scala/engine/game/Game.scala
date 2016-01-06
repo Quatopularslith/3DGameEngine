@@ -12,8 +12,8 @@ object Game {
 
   def input(): Unit ={
 
-    if(Input.isKeyDown(GLFW_KEY_A)) println("PRESSED UP")
-    if(Input.isKeyUp(GLFW_KEY_A)) println("RELEASED UP")
+    if(Input.isKeyDown(GLFW_KEY_UP)) println("PRESSED UP")
+    if(Input.isKeyUp(GLFW_KEY_UP)) println("RELEASED UP")
     if(Input.isMButtonDown(GLFW_MOUSE_BUTTON_1)) println("MOUSE DOWN")
     if(Input.isMButtonUp(GLFW_MOUSE_BUTTON_1)) println("MOUSE UP")
 

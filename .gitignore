@@ -6,3 +6,4 @@ project/build.properties
 target/
 classes/
 out/
+MANIFEST.MF

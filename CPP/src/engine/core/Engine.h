@@ -19,6 +19,7 @@ private:
     static void render();
     static void cleanup();
     static void init();
+    static void glInit();
 };
 
 

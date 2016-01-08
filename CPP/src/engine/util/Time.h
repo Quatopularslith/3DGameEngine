@@ -10,9 +10,10 @@ class Time {
 public:
     static long second;
     static double delta;
+    static unsigned long NANO_SECOND;
     static void setDelta(double delta);
     static double getDelta();
-    static long getTime();
+    static long long int getTime();
 };
 
 

@@ -17,7 +17,7 @@ public:
     static std::string title;
     static bool fullScreen;
 
-    static GLFWwindow* createWindow(int width, int height, std::string title, bool fullScreen, GLFWmonitor *monitor);
+    static GLFWwindow* createWindow(int width, int height, std::string title, bool fullScreen = false);
     static void setTitle(std::string title);
     static void showWindow();
     static void setWindowHint(int hint, int boolVal);
@@ -25,7 +25,7 @@ public:
     static void makeCurrentContext();
     static void vsync(bool boolVal);
     static void update();
-    static void isCloseRequested();
+    static bool isCloseRequested();
     static void close();
 
 };

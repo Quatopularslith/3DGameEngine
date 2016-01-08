@@ -29,7 +29,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/src/wgl_context.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/src/win32_tls.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/src/winmm_joystick.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/glfwinfo.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/cursor.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/title.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/empty.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/tearing.c" isTestSource="false" />
@@ -38,7 +38,6 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/clipboard.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/events.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/cursor.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/iconify.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/threads.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/windows.c" isTestSource="false" />
@@ -46,6 +45,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/msaa.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/gamma.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/sharing.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/glfw/tests/glfwinfo.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/include/GLFW/glfw3native.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/include/GLFW/glfw3.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/examples/simple.c" isTestSource="false" />
@@ -61,11 +61,17 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/glfw/cmake_uninstall.cmake.in" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/engine/core/Engine.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/engine/core/Time.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/engine/core/Time.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/engine/core/Engine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/util/Vector2f.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/util/Time.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/util/Vector2f.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/util/Time.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/engine/window/Window.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/engine/window/Window.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/game/Game.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/game/Game.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/input/Input.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/engine/input/Input.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/glew/glew.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/glew/glew.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/Test.cpp" isTestSource="false" />
@@ -78,22 +84,22 @@
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/Debug/lib/glfw/src" />
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/MinSizeRel/lib/glfw/src" />
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/RelWithDebInfo/lib/glfw/src" />
-          <root url="file://$MODULE_DIR$/../../../MinGW/lib/gcc/mingw32/4.8.1/include-fixed" />
-          <root url="file://$MODULE_DIR$/../../../MinGW/lib/gcc/mingw32/4.8.1/include" />
-          <root url="file://$MODULE_DIR$/../../../MinGW/include" />
           <root url="file://$MODULE_DIR$/lib/glfw/deps" />
           <root url="file://$MODULE_DIR$/lib/glfw/include" />
+          <root url="file://$MODULE_DIR$/../../../mingw-w64/x86_64-4.9.3-posix-seh-rt_v4-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.3/include" />
+          <root url="file://$MODULE_DIR$/../../../mingw-w64/x86_64-4.9.3-posix-seh-rt_v4-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.3/include-fixed" />
+          <root url="file://$MODULE_DIR$/../../../mingw-w64/x86_64-4.9.3-posix-seh-rt_v4-rev1/mingw64/x86_64-w64-mingw32/include" />
         </CLASSES>
         <SOURCES>
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/Release/lib/glfw/src" />
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/Debug/lib/glfw/src" />
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/MinSizeRel/lib/glfw/src" />
           <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/4b2d8441/4b2d8441/RelWithDebInfo/lib/glfw/src" />
-          <root url="file://$MODULE_DIR$/../../../MinGW/lib/gcc/mingw32/4.8.1/include-fixed" />
-          <root url="file://$MODULE_DIR$/../../../MinGW/lib/gcc/mingw32/4.8.1/include" />
-          <root url="file://$MODULE_DIR$/../../../MinGW/include" />
           <root url="file://$MODULE_DIR$/lib/glfw/deps" />
           <root url="file://$MODULE_DIR$/lib/glfw/include" />
+          <root url="file://$MODULE_DIR$/../../../mingw-w64/x86_64-4.9.3-posix-seh-rt_v4-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.3/include" />
+          <root url="file://$MODULE_DIR$/../../../mingw-w64/x86_64-4.9.3-posix-seh-rt_v4-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.3/include-fixed" />
+          <root url="file://$MODULE_DIR$/../../../mingw-w64/x86_64-4.9.3-posix-seh-rt_v4-rev1/mingw64/x86_64-w64-mingw32/include" />
         </SOURCES>
         <excluded>
           <root url="file://$MODULE_DIR$/lib/glfw/deps/glad/glad.h" />

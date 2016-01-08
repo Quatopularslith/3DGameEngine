@@ -70,9 +70,10 @@ object Engine {
       val startTime: Long = Time.getTime
       val passedTime: Long = startTime - lastTime
       lastTime = startTime
-
       unprocessedTime += passedTime / Time.second.asInstanceOf[Double]
       frameCounter += passedTime
+
+      println(Time.getTime)
 
       //Make sure everything stays in sync
       while (unprocessedTime > frameTime) {

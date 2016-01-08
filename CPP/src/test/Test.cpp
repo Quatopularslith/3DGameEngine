@@ -10,7 +10,6 @@
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
     Engine::start();
     return 0;
 }

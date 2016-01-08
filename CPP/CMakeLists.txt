@@ -9,7 +9,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 set(GLEW_SOURCE src/glew/glew.c src/glew/glew.h)
 
-set(SOURCE_FILES ${GLEW_SOURCE} src/test/Test.cpp src/engine/core/Engine.cpp src/engine/core/Engine.h src/engine/util/Time.cpp src/engine/util/Time.h src/engine/window/Window.cpp src/engine/window/Window.h src/engine/input/Input.cpp src/engine/input/Input.h src/engine/input/Input.cpp src/engine/input/Input.h src/engine/game/Game.cpp src/engine/game/Game.h src/engine/util/Vector2f.h src/engine/util/Vector2f.cpp src/engine/util/Vector2f.h)
+set(SOURCE_FILES ${GLEW_SOURCE} src/test/Test.cpp src/engine/core/Engine.cpp src/engine/core/Engine.h src/engine/util/Time.cpp src/engine/util/Time.h src/engine/window/Window.cpp src/engine/window/Window.h src/engine/input/Input.cpp src/engine/input/Input.h src/engine/input/Input.cpp src/engine/input/Input.h src/engine/game/Game.cpp src/engine/game/Game.h src/engine/util/Vector2f.h src/engine/util/Vector2f.cpp src/engine/util/Vector2f.h src/engine/util/Vector3f.cpp src/engine/util/Vector3f.h)
 add_executable(3DGameEngine ${SOURCE_FILES})
 
 target_link_libraries (3DGameEngine glfw ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES})

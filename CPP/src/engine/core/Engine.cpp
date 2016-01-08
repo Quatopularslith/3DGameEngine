@@ -115,12 +115,12 @@ void Engine::glInit(){
     glfwSetErrorCallback(error_callback);
 
     if(glewInit() != GL_TRUE){
-        std::cout << "Glewa intializum ad aborior" << std::endl;
+        std::cout << "Glew intializum ad aborior" << std::endl;
         exit(-1);
     }
 
     if(glfwInit() != GL_TRUE){
-        std::cout << "GLFWa intializum ad aborior" << std::endl;
+        std::cout << "GLFW intializum ad aborior" << std::endl;
         exit(-1);
     }
 

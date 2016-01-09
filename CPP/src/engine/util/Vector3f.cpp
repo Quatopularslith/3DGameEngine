@@ -59,9 +59,10 @@ Vector3f Vector3f::cross(Vector3f v){
 }
 
 Vector3f Vector3f::normalize() {
-    Vector3f::x /= length();
-    Vector3f::y /= length();
-    Vector3f::z /= length();
+    float length = Vector3f::length();
+    Vector3f::x /= length;
+    Vector3f::y /= length;
+    Vector3f::z /= length;
     return *this;
 }
 

@@ -3,6 +3,7 @@
 //
 
 #include "Vector2f.h"
+#include "Quaternion.h"
 #include <string>
 #include <sstream>
 #include <math.h>
@@ -43,8 +44,9 @@ float Vector2f::dot(Vector2f v){
 }
 
 Vector2f Vector2f::normalize() {
-    Vector2f::x /= length();
-    Vector2f::y /= length();
+    float length = Vector2f::length();
+    Vector2f::x /= length;
+    Vector2f::y /= length;
     return *this;
 }
 

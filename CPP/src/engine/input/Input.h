@@ -1,5 +1,5 @@
 //
-// Created by Razim on 1/7/2016.
+// Created by Mnenmenth on 1/7/2016.
 //
 
 #ifndef INC_3DGAMEENGINE_Input_H

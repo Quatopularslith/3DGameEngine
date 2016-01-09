@@ -1,5 +1,5 @@
 //
-// Created by Razim on 1/8/2016.
+// Created by Mnenmenth on 1/8/2016.
 //
 
 #include "Vector3f.h"

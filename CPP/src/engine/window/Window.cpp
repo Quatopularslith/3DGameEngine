@@ -1,5 +1,5 @@
 //
-// Created by Razim on 1/6/2016.
+// Created by Mnenmenth on 1/6/2016.
 //
 
 #include "Window.h"

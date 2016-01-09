@@ -1,5 +1,5 @@
 //
-// Created by Razim on 1/8/2016.
+// Created by Mnenmenth on 1/8/2016.
 //
 
 #ifndef INC_3DGAMEENGINE_VECTOR3F_H

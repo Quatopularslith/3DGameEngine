@@ -6,4 +6,5 @@ project/build.properties
 target/
 classes/
 out/
+lwjglNatives/
 MANIFEST.MF

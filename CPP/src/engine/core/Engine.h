@@ -6,6 +6,8 @@
 #define INC_3DGAMEENGINE_ENGINE_H
 
 
+#include "../game/Game.h"
+
 class Engine {
 
 public:
@@ -19,7 +21,7 @@ private:
     static void render();
     static void cleanup();
     static void init();
-    static void glInit();
+    static Game game;
 };
 
 

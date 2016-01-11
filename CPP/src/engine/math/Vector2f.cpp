@@ -52,9 +52,9 @@ Vector2f Vector2f::normalize() {
 
 Vector2f Vector2f::rotate(float angle) {
     double radians = angle * (3.141592653 / 180);
-    double cos = cos(radians);
-    double sin = sin(radians);
-    return Vector2f((float)(Vector2f::x * cos - Vector2f::y * sin), (float)(Vector2f::x * sin + Vector2f::y * cos));
+    double cos_ = cos(radians);
+    double sin_ = sin(radians);
+    return Vector2f((float)(Vector2f::x * cos_ - Vector2f::y * sin_), (float)(Vector2f::x * sin_ + Vector2f::y * cos_));
 }
 
 Vector2f Vector2f::add(Vector2f v) {

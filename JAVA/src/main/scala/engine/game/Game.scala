@@ -1,6 +1,8 @@
 package engine.game
 
 import engine.input.Input
+import engine.mesh.{Vertex, Mesh}
+import engine.math.Vector3f
 import org.lwjgl.glfw.GLFW._
 /**
   * Created by Mnenmenth Alkaborin
@@ -8,19 +10,25 @@ import org.lwjgl.glfw.GLFW._
   * for licensing information
   * https://github.com/Mnenmenth
   */
-object Game {
+class Game {
+
+  val mesh = new Mesh
+  val data: Array[Vertex] = Array(new Vertex(new Vector3f(-1, -1, 0)),
+                               new Vertex(new Vector3f(0, 1, 0)),
+                               new Vertex(new Vector3f(1, -1, 0)))
+  mesh.addVertices(data)
 
   def input(): Unit ={
 
     if(Input.isKeyDown(GLFW_KEY_UP)) println("PRESSED UP")
-    if(Input.isKeyUp(GLFW_KEY_UP)) println("RELEASED UP")
-    if(Input.isMButtonDown(GLFW_MOUSE_BUTTON_1)) println("MOUSE DOWN")
-    if(Input.isMButtonUp(GLFW_MOUSE_BUTTON_1)) println("MOUSE UP")
+    if(Input.isKeyReleased(GLFW_KEY_UP)) println("RELEASED UP")
+    if(Input.isMButtonDown(GLFW_MOUSE_BUTTON_LEFT)) println("MOUSE DOWN")
+    if(Input.isMButtonReleased(GLFW_MOUSE_BUTTON_LEFT)) println("MOUSE UP")
 
   }
 
   def render(): Unit ={
-
+    mesh.draw()
   }
 
   def update(): Unit ={

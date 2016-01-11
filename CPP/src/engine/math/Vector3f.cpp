@@ -66,9 +66,9 @@ Vector3f Vector3f::normalize() {
     return *this;
 }
 
-Vector3f Vector3f::rotate(float angle) {
-    return NULL;
-}
+//Vector3f Vector3f::rotate(float angle) {
+//    return NULL;
+//}
 
 Vector3f Vector3f::add(Vector3f v) {
     return Vector3f(Vector3f::x + v.getX(), Vector3f::y + v.getY(), Vector3f::z + v.getZ());

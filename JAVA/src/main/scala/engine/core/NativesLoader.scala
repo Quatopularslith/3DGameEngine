@@ -4,6 +4,8 @@ import java.io.{File, FileOutputStream}
 import java.nio.channels.Channels
 import java.nio.file.{Files, Paths}
 
+import scala.collection.mutable.ListBuffer
+
 /**
   * Created by Mnenmenth Alkaborin
   * Please refer to LICENSE file if included
@@ -67,8 +69,8 @@ object NativesLoader {
 
   }
 
-  private val destDir = System.getProperty("java.io.tmpdir") + "/lwjglNatives/"
-
+  private val destDir = Paths.get("").toAbsolutePath.toString + "/lwjglNatives/"
+  private val files = new ListBuffer[File]
   private def move(lib: String): String = {
     val source = Channels.newChannel(NativesLoader.getClass.getClassLoader.getResourceAsStream(lib))
     val fileOut = new File(destDir, lib.split('/').last)
@@ -78,8 +80,13 @@ object NativesLoader {
     dest.close()
 
     fileOut.deleteOnExit()
+    files += fileOut
     println(lib.split('/').last + " loaded")
     fileOut.getAbsolutePath
+  }
+
+  def delete(): Unit ={
+    files.foreach(f => f.delete())
   }
 
 }

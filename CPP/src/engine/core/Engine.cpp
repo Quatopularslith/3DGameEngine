@@ -14,28 +14,48 @@
 #include "../input/Input.h"
 #include "../game/Game.h"
 #include "../util/Time.h"
-#include "../util/Vector2f.h"
+#include "../util/RenderUtil.h"
 #include <chrono>
 #include <thread>
 
 bool Engine::running = false;
 int Engine::FPS_CAP = 60;
+Game Engine::game;
 
 void Engine::start() { if(!running) run(); }
 
 void Engine::stop() { if(running) Engine::running = false; }
 
+void error_callback(int error, const char* description){
+    std::cout << "Description: " << description << std::endl << "Error: " << stderr << std::endl;
+}
+
 void Engine::run() {
 
     running = true;
+    glfwSetErrorCallback(error_callback);
 
-    Engine::glInit();
+    if(glfwInit() != GL_TRUE){
+        std::cout << "GLFW intializum ad aborior" << std::endl;
+        exit(-1);
+    }
+    RenderUtil::initGraphics();
+
     Window::createWindow(1280, 720, "3D Game Engine");
     Window::makeCurrentContext();
     Window::centerWindow();
     Window::showWindow();
+
+    glewExperimental = GL_TRUE;
+    if(glewInit() != GLEW_OK){
+        std::cout << "Glew intializum ad aborior" << std::endl;
+        exit(-1);
+    }
+    printf("hi\n");
     Engine::init();
 
+    Engine::game = Game();
+printf("hi\n");
     Engine::loop();
 }
 
@@ -70,10 +90,11 @@ void Engine::loop() {
 
             Time::setDelta(frameTime);
 
-            Game::input();
-            Game::update();
+            Engine::game.input();
+            Engine::game.update();
 
             if(frameCounter >= Time::NANO_SECOND){
+                std::cout << frames << std::endl;
                 frames = 0;
                 frameCounter = 0;
             }
@@ -90,7 +111,8 @@ void Engine::loop() {
 }
 
 void Engine::render(){
-    Game::render();
+    RenderUtil::clearScreen();
+    Engine::game.render();
     Window::update();
 }
 
@@ -99,29 +121,9 @@ void Engine::cleanup(){
     glfwTerminate();
 }
 
-void error_callback(int error, const char* description){
-    std::cout << "Description: " << description << std::endl << "Error: " << stderr << std::endl;
-}
-
 void Engine::init(){
 
     glfwSetKeyCallback(Window::window, Input::key_callback);
     glfwSetMouseButtonCallback(Window::window, Input::mButton_callback);
     glfwSetInputMode(Window::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-}
-
-void Engine::glInit(){
-
-    glfwSetErrorCallback(error_callback);
-
-    if(glewInit() != GL_TRUE){
-        std::cout << "Glew intializum ad aborior" << std::endl;
-        exit(-1);
-    }
-
-    if(glfwInit() != GL_TRUE){
-        std::cout << "GLFW intializum ad aborior" << std::endl;
-        exit(-1);
-    }
-
 }

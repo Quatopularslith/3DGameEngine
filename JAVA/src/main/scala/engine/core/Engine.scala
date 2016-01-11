@@ -2,9 +2,11 @@ package engine.core
 
 import engine.game.Game
 import engine.input.Input
+import engine.util.RenderUtil
 import engine.window.Window
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.opengl.GL
 
 /**
   * Created by Mnenmenth Alkaborin
@@ -16,6 +18,8 @@ object Engine {
 
   private var running = false
   private val FPS_CAP = 60
+
+  private lazy val game = new Game
 
   def start(): Unit = {
 
@@ -37,7 +41,6 @@ object Engine {
 
     //Set running to true
     running = true
-
     init()
 
     //Create window
@@ -45,6 +48,13 @@ object Engine {
     Window.makeCurrentContext()
     Window.centerWindow()
     Window.showWindow()
+
+    glfwSetKeyCallback(Window.window, Input.KeyCallback)
+    glfwSetMouseButtonCallback(Window.window, Input.MButtonCallback)
+
+    GL.createCapabilities()
+    RenderUtil.initGraphics()
+    println(RenderUtil.openGLVersion)
 
     loop()
   }
@@ -73,10 +83,11 @@ object Engine {
       unprocessedTime += passedTime / Time.second.asInstanceOf[Double]
       frameCounter += passedTime
 
-      println(Time.getTime)
-
       //Make sure everything stays in sync
       while (unprocessedTime > frameTime) {
+        Input.resetStates()
+        glfwPollEvents()
+
         shouldRender = true
         unprocessedTime -= frameTime
         if (Window.isCloseRequested) stop()
@@ -84,9 +95,8 @@ object Engine {
         Time.setDelta(frameTime)
 
         //Update Game
-        Input.update()
-        Game.input()
-        Game.update()
+        game.input()
+        game.update()
 
         //Print frames and reset counter
         if (frameCounter >= Time.second) {
@@ -103,7 +113,6 @@ object Engine {
         frames += 1
       } else Thread.sleep(1)
 
-      glfwPollEvents()
     }
 
     cleanUp()
@@ -112,12 +121,13 @@ object Engine {
 
   private def render(): Unit = {
     Window.update()
-    Game.render()
+    game.render()
   }
 
   private def cleanUp(): Unit = {
     Window.close()
     glfwTerminate()
+    NativesLoader.delete()
   }
 
   private def init(): Unit = {

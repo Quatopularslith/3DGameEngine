@@ -6,14 +6,17 @@
 #define INC_3DGAMEENGINE_GAME_H
 
 
+#include "../mesh/Mesh.h"
+
 class Game {
 
 public:
-    static void input();
-    static void render();
-    static void update();
+    Game();
+    void input();
+    void render();
+    void update();
 private:
-
+    Mesh mesh;
 };
 
 

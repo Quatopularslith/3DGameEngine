@@ -1,0 +1,39 @@
+package engine.math
+
+import scala.collection.mutable.ListBuffer
+
+/**
+  * Created by Mnenmenth Alkaborin
+  * Please refer to LICENSE file if included
+  * for licensing information
+  * https://github.com/Mnenmenth
+  */
+class Matrix4f {
+
+  val matrix = Array.ofDim[Float](2,2)
+
+  def initIdentity(): Matrix4f = {
+    matrix(0)(0) = 1; matrix(0)(1) = 0; matrix(0)(2) = 0; matrix(0)(3) = 0;
+    matrix(1)(0) = 0; matrix(1)(1) = 1; matrix(1)(2) = 0; matrix(1)(3) = 0;
+    matrix(2)(0) = 0; matrix(2)(1) = 0; matrix(2)(2) = 1; matrix(2)(3) = 0;
+    matrix(3)(0) = 0; matrix(3)(1) = 0; matrix(3)(2) = 0; matrix(3)(3) = 1;
+    this
+  }
+
+  def mult(m: Matrix4f): Matrix4f = {
+    val res = new Matrix4f
+    for(i <- 0 until 4){
+      for(j <- 0 until 4){
+        res.set(i, j, matrix(i)(0) * m.get(0, j) +
+                      matrix(i)(1) * m.get(1, j) +
+                      matrix(i)(2) * m.get(2, j) +
+                      matrix(i)(3) * m.get(3, j))
+      }
+    }
+    res
+  }
+
+  def get(x: Int, y: Int): Float = matrix(x)(y)
+  def set(x: Int, y: Int, value: Float): Unit = matrix(x)(y) = value
+
+}

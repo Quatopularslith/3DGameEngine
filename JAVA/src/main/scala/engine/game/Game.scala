@@ -1,9 +1,11 @@
 package engine.game
 
+import engine.core.Time
 import engine.input.Input
 import engine.mesh.{Vertex, Mesh}
 import engine.math.Vector3f
 import engine.shader.{ResourceLoader, Shader}
+import engine.transformation.Transformation
 import org.lwjgl.glfw.GLFW._
 /**
   * Created by Mnenmenth Alkaborin
@@ -20,10 +22,15 @@ class Game {
 
   mesh.addVertices(data)
 
+  private val transform = new Transformation
+
   private val shader = new Shader
   shader.addVertexShader(ResourceLoader.loadShader("basicVertex.glsl", isStream = true))
   shader.addFragmentShader(ResourceLoader.loadShader("basicFragment.glsl", isStream = true))
   shader.compileShader()
+
+  shader.addUniform("transform")
+  shader.addUniform("uniformFloat")
 
   def input(): Unit ={
 
@@ -36,11 +43,18 @@ class Game {
 
   def render(): Unit ={
     shader.bind()
+    shader.setUniformm("transform", transform.transformationMatrix)
+    shader.setUniformf("uniformFloat", tempAmount)
     mesh.draw()
   }
 
-  def update(): Unit ={
+  var temp: Float = 0.0f
+  var tempAmount: Float = 0.0f
 
+  def update(): Unit ={
+    temp += Time.delta.toFloat
+    tempAmount = Math.abs(Math.sin(temp)).toFloat
+    transform.translation = new Vector3f(Math.sin(temp).toFloat, 0, 0)
   }
 
 }

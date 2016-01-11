@@ -2,6 +2,7 @@ package engine.util
 
 import java.nio.FloatBuffer
 
+import engine.math.Matrix4f
 import engine.mesh.Vertex
 import org.lwjgl.BufferUtils
 
@@ -13,12 +14,8 @@ import org.lwjgl.BufferUtils
   */
 object Util {
 
-  def createFloatBuffer(size: Int): FloatBuffer ={
-    BufferUtils.createFloatBuffer(size)
-  }
-
-  def createFlippedBuffer(vertices: Array[Vertex]): FloatBuffer ={
-    val buffer = createFloatBuffer(vertices.length * Vertex.SIZE)
+  def createFlippedBuffer(vertices: Array[Vertex]): FloatBuffer = {
+    val buffer = BufferUtils.createFloatBuffer(vertices.length * Vertex.SIZE)
 
     for(i <- 0 until vertices.length){
       buffer.put(vertices(i).pos.x)
@@ -26,6 +23,14 @@ object Util {
       buffer.put(vertices(i).pos.z)
     }
 
+    buffer.flip()
+    buffer
+  }
+
+  def createFlippedBuffer(value: Matrix4f): FloatBuffer = {
+    val buffer = BufferUtils.createFloatBuffer(16)
+
+    for(i <- 0 until 4) for (j <- 0 until 4) buffer.put(value.get(i, j))
     buffer.flip()
     buffer
   }

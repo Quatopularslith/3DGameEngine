@@ -12,11 +12,12 @@ import scala.io.Source
   */
 object ResourceLoader {
 
-  def loadShader(fileName: String, isStream: Boolean, path: String = "./engine/shaders/"): String = {
-    if(isStream)
-      Source.fromInputStream(getClass.getResourceAsStream(fileName)).getLines().mkString
+  def loadShader(fileName: String, isStream: Boolean, path: String = "/engine/shaders/"): String = {
+    if(isStream) {
+      Source.fromInputStream(getClass.getResourceAsStream(path + fileName)).getLines().mkString("\n")
+    }
     else
-      Source.fromFile(fileName).getLines().mkString
+      Source.fromFile(path + fileName).getLines().mkString
   }
 
 }

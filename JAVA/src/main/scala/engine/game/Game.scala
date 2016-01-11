@@ -3,6 +3,7 @@ package engine.game
 import engine.input.Input
 import engine.mesh.{Vertex, Mesh}
 import engine.math.Vector3f
+import engine.shader.{ResourceLoader, Shader}
 import org.lwjgl.glfw.GLFW._
 /**
   * Created by Mnenmenth Alkaborin
@@ -12,11 +13,16 @@ import org.lwjgl.glfw.GLFW._
   */
 class Game {
 
-  val mesh = new Mesh
+  private val mesh = new Mesh
   val data: Array[Vertex] = Array(new Vertex(new Vector3f(-1, -1, 0)),
                                new Vertex(new Vector3f(0, 1, 0)),
                                new Vertex(new Vector3f(1, -1, 0)))
   mesh.addVertices(data)
+
+  private val shader = new Shader
+  shader.addVertexShader(ResourceLoader.loadShader("basicVertex.glsl", isStream = true))
+  shader.addFragmentShader(ResourceLoader.loadShader("basicFragment.glsl", isStream = true))
+  shader.compileShader()
 
   def input(): Unit ={
 
@@ -28,6 +34,7 @@ class Game {
   }
 
   def render(): Unit ={
+    shader.bind()
     mesh.draw()
   }
 

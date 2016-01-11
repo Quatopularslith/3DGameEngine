@@ -34,10 +34,10 @@ class Shader {
 
   def compileShader(): Unit ={
     glLinkProgram(program)
-    if(glGetShaderi(program, GL_LINK_STATUS) == 0) println(glGetShaderInfoLog(program, 1024))
+    if(glGetProgrami(program, GL_LINK_STATUS) == 0) println(glGetShaderInfoLog(program, 1024))
 
     glValidateProgram(program)
-    if(glGetShaderi(program, GL_VALIDATE_STATUS) == 0) println(glGetShaderInfoLog(program, 1024))
+    if(glGetProgrami(program, GL_VALIDATE_STATUS) == 0) println(glGetShaderInfoLog(program, 1024))
   }
 
   private def addProgram(text: String, pType: Int): Unit ={
@@ -50,7 +50,7 @@ class Shader {
 
     if(glGetShaderi(shader, GL_COMPILE_STATUS) == 0) println(glGetShaderInfoLog(shader, 1024))
 
-    glAttachShader(shader, program)
+    glAttachShader(program, shader)
 
   }
 

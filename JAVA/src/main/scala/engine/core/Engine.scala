@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL
 object Engine {
 
   private var running = false
-  private val FPS_CAP = 60
+  private val FPS_CAP = 5000
 
   private lazy val game = new Game
 
@@ -44,6 +44,7 @@ object Engine {
     init()
 
     //Create window
+    Window.setWindowHint(GLFW_SAMPLES, 16)
     Window.createWindow(1280, 720, "3D Engine")
     Window.makeCurrentContext()
     Window.centerWindow()
@@ -120,8 +121,9 @@ object Engine {
   }
 
   private def render(): Unit = {
-    Window.update()
+    RenderUtil.clearScreen()
     game.render()
+    Window.update()
   }
 
   private def cleanUp(): Unit = {

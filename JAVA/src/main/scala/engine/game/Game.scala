@@ -14,9 +14,10 @@ import org.lwjgl.glfw.GLFW._
 class Game {
 
   private val mesh = new Mesh
-  val data: Array[Vertex] = Array(new Vertex(new Vector3f(-1, -1, 0)),
+  val data: Array[Vertex] = Array[Vertex] (new Vertex(new Vector3f(-1, -1, 0)),
                                new Vertex(new Vector3f(0, 1, 0)),
                                new Vertex(new Vector3f(1, -1, 0)))
+
   mesh.addVertices(data)
 
   private val shader = new Shader

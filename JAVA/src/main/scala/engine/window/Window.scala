@@ -31,7 +31,7 @@ object Window {
       window = glfwCreateWindow(width, height, title, null.asInstanceOf[Long], null.asInstanceOf[Long])
     if (window != 0) window
     else {
-      sys.exit();
+      sys.exit()
       0.asInstanceOf[Long]
     }
   }

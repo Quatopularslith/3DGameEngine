@@ -14,11 +14,11 @@ import org.lwjgl.opengl.GL20._
 
 class Mesh {
 
-  private var vbo: Int = glGenBuffers
+  private val vbo: Int = glGenBuffers
   private var size: Int = _
 
   def addVertices(vertices: Array[Vertex]): Unit = {
-    size = vertices.length * Vertex.SIZE
+    size = vertices.length
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo)
     glBufferData(GL_ARRAY_BUFFER, Util.createFlippedBuffer(vertices), GL_STATIC_DRAW)

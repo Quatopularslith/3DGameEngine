@@ -1,6 +1,6 @@
 package engine.util
 
-import java.nio.FloatBuffer
+import java.nio.{IntBuffer, FloatBuffer}
 
 import engine.math.Matrix4f
 import engine.mesh.Vertex
@@ -31,6 +31,13 @@ object Util {
     val buffer = BufferUtils.createFloatBuffer(16)
 
     for(i <- 0 until 4) for (j <- 0 until 4) buffer.put(value.get(i, j))
+    buffer.flip()
+    buffer
+  }
+
+  def createFlippedBuffer(values: Array[Int]): IntBuffer ={
+    val buffer = BufferUtils.createIntBuffer(values.length)
+    buffer.put(values)
     buffer.flip()
     buffer
   }

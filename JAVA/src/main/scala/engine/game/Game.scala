@@ -4,8 +4,9 @@ import engine.core.Time
 import engine.input.Input
 import engine.mesh.{Vertex, Mesh}
 import engine.math.Vector3f
-import engine.shader.{ResourceLoader, Shader}
+import engine.shader.Shader
 import engine.transformation.Transformation
+import engine.util.ResourceLoader
 import org.lwjgl.glfw.GLFW._
 /**
   * Created by Mnenmenth Alkaborin
@@ -15,12 +16,15 @@ import org.lwjgl.glfw.GLFW._
   */
 class Game {
 
-  private val mesh = new Mesh
-  val data: Array[Vertex] = Array[Vertex] (new Vertex(new Vector3f(-1, -1, 0)),
+  private val mesh = ResourceLoader.loadMesh("cube.obj", isStream = true)
+  /*val vertices: Array[Vertex] = Array[Vertex] (new Vertex(new Vector3f(-1, -1, 0)),
                                new Vertex(new Vector3f(0, 1, 0)),
-                               new Vertex(new Vector3f(1, -1, 0)))
+                               new Vertex(new Vector3f(1, -1, 0)),
+                               new Vertex(new Vector3f(0,-1,1)))
 
-  mesh.addVertices(data)
+  val indicies: Array[Int] = Array[Int] (0, 1, 3, 3, 1, 2, 2, 1, 0, 0, 2, 3)
+
+  mesh.addVertices(vertices, indicies)*/
 
   private val transform = new Transformation
 
@@ -30,7 +34,7 @@ class Game {
   shader.compileShader()
 
   shader.addUniform("transform")
-  shader.addUniform("uniformFloat")
+  //shader.addUniform("uniformFloat")
 
   def input(): Unit ={
 
@@ -44,17 +48,20 @@ class Game {
   def render(): Unit ={
     shader.bind()
     shader.setUniformm("transform", transform.transformationMatrix)
-    shader.setUniformf("uniformFloat", tempAmount)
+    //shader.setUniformf("uniformFloat", uniformFloat)
     mesh.draw()
   }
 
-  var temp: Float = 0.0f
-  var tempAmount: Float = 0.0f
+  var delta: Float = 0.0f
+  var uniformFloat: Float = 0.0f
 
   def update(): Unit ={
-    temp += Time.delta.toFloat
-    tempAmount = Math.abs(Math.sin(temp)).toFloat
-    transform.translation = new Vector3f(Math.sin(temp).toFloat, 0, 0)
+    delta += Time.delta.toFloat
+    val sinDelta = Math.sin(delta)
+    //uniformFloat = Math.abs(Math.sin(delta)).toFloat
+    transform.translation = new Vector3f(sinDelta.toFloat, 0, 0)
+    transform.rotation = new Vector3f(0, Math.sin(delta).toFloat * 90, sinDelta.toFloat * 180)
+    transform.scale = new Vector3f((0.7 * sinDelta).toFloat, (0.7 * sinDelta).toFloat, (0.7 * sinDelta).toFloat)
   }
 
 }

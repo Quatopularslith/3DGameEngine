@@ -45,7 +45,7 @@ object Engine {
 
     //Create window
     Window.setWindowHint(GLFW_SAMPLES, 16)
-    Window.createWindow(1280, 720, "3D Engine")
+    Window.createWindow(720, 720, "3D Engine")
     Window.makeCurrentContext()
     Window.centerWindow()
     Window.showWindow()

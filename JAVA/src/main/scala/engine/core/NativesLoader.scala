@@ -31,19 +31,19 @@ object NativesLoader {
       "linux"
   }
 
-  private val win32Dir = "/engine/natives/win/32/"
+  private val win32Dir = "engine/natives/win/32/"
   private val win32 = List(win32Dir + "glfw32.dll", win32Dir + "jemalloc32.dll", win32Dir + "lwjgl32.dll", win32Dir + "OpenAL32.dll")
 
   private val win64Dir = "engine/natives/win/64/"
   private val win64 = List(win64Dir + "glfw.dll", win64Dir + "jemalloc.dll", win64Dir + "lwjgl.dll", win64Dir + "OpenAL.dll")
 
-  private val lin32Dir = "/engine/natives/linux/32/"
+  private val lin32Dir = "engine/natives/linux/32/"
   private val lin32 = List(win32Dir + "libglfw32.so", win32Dir + "libjemalloc32.so", win32Dir + "liblwjgl32.so", win32Dir + "libopenal32.so")
 
-  private val lin64Dir = "/engine/natives/linux/64/"
+  private val lin64Dir = "engine/natives/linux/64/"
   private val lin64 = List(win64Dir + "libglfw.so", win64Dir + "libjemalloc.so", win64Dir + "liblwjgl.so", win64Dir + "libopenal.so")
 
-  private val macDir = "/engine/natives/mac/"
+  private val macDir = "engine/natives/mac/"
   private val mac = List(macDir + "libglfw.dylib", macDir + "libjemalloc.dylib", macDir + "liblwjgl.dylib", macDir + "libopenal.dylib")
 
   def load(): Unit = {

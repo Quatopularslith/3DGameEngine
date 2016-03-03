@@ -11,8 +11,16 @@
 
 class ResourceLoader {
 public:
-    static const GLchar** loadShader(std::string fileName, std::string path = "/engine/shaders/");
-    static Mesh loadMesh(std::string fileName, std::string path = "/engine/mesh");
+
+    struct MeshVerts {
+        Vertex* vertices;
+        int* indices;
+    };
+
+    static const char *loadShader(std::string fileName, std::string path = "engine/shaders/");
+
+    static MeshVerts loadMesh(std::string fileName, std::string path = "engine/mesh/");
+
 private:
 };
 

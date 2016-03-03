@@ -15,8 +15,10 @@ class Util {
 public:
     /*static std::array<GLfloat> createFlippedBuffer(Vertex* vertices);
     static std::array<GLfloat> createFlippedBuffer(int* vertices);*/
-    static GLfloat* createFlippedBuffer(Matrix4f value);
+    static GLfloat *createFlippedBuffer(Matrix4f value);
+
     static std::vector<std::string> splitString(std::string str, char delimiter);
+
 private:
 };
 

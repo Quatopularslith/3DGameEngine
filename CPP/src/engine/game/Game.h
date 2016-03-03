@@ -14,13 +14,18 @@ class Game {
 
 public:
     Game();
+    ~Game();
+
     void input();
+
     void render();
+
     void update();
+
 private:
-    Mesh mesh;
-    Transformation transform;
-    Shader shader;
+    Mesh* mesh;
+    Transformation* transform;
+    Shader* shader;
     float delta;
     float uniformFloat;
 };

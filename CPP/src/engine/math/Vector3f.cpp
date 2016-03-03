@@ -5,7 +5,6 @@
 #include "Vector3f.h"
 #include <math.h>
 #include <sstream>
-#include <string>
 
 Vector3f::Vector3f(float x, float y, float z) {
     Vector3f::x = x;
@@ -37,21 +36,21 @@ float Vector3f::getZ() {
     return Vector3f::z;
 }
 
-std::string Vector3f::toString(){
+std::string Vector3f::toString() {
     std::stringstream stream;
     stream << "(x: " << Vector3f::x << ", y: " << Vector3f::y << ", z: " << Vector3f::z << ")";
     return stream.str();
 }
 
-float Vector3f::length(){
-    return (float)sqrt(pow(Vector3f::x, 2) + pow(Vector3f::y, 2) + pow(Vector3f::z, 2));
+float Vector3f::length() {
+    return (float) sqrt(pow(Vector3f::x, 2) + pow(Vector3f::y, 2) + pow(Vector3f::z, 2));
 }
 
-float Vector3f::dot(Vector3f v){
+float Vector3f::dot(Vector3f v) {
     return Vector3f::x * v.getX() + Vector3f::y * v.getY() + Vector3f::z * v.getZ();
 }
 
-Vector3f Vector3f::cross(Vector3f v){
+Vector3f Vector3f::cross(Vector3f v) {
     float x = Vector3f::y * v.getZ() - Vector3f::z * v.getY();
     float y = Vector3f::z * v.getX() - Vector3f::x * v.getZ();
     float z = Vector3f::x * v.getY() - Vector3f::y * v.getX();
@@ -74,7 +73,7 @@ Vector3f Vector3f::add(Vector3f v) {
     return Vector3f(Vector3f::x + v.getX(), Vector3f::y + v.getY(), Vector3f::z + v.getZ());
 }
 
-Vector3f Vector3f::add(float v){
+Vector3f Vector3f::add(float v) {
     return Vector3f(Vector3f::x + v, Vector3f::y + v, Vector3f::z + v);
 }
 
@@ -82,7 +81,7 @@ Vector3f Vector3f::sub(Vector3f v) {
     return Vector3f(Vector3f::x - v.getX(), Vector3f::y - v.getY(), Vector3f::z - v.getZ());
 }
 
-Vector3f Vector3f::sub(float v){
+Vector3f Vector3f::sub(float v) {
     return Vector3f(Vector3f::x - v, Vector3f::y - v, Vector3f::z - v);
 }
 
@@ -90,13 +89,14 @@ Vector3f Vector3f::mult(Vector3f v) {
     return Vector3f(Vector3f::x * v.getX(), Vector3f::y * v.getY(), Vector3f::z * v.getZ());
 }
 
-Vector3f Vector3f::mult(float v){
+Vector3f Vector3f::mult(float v) {
     return Vector3f(Vector3f::x * v, Vector3f::y * v, Vector3f::z * v);
 }
+
 Vector3f Vector3f::div(Vector3f v) {
     return Vector3f(Vector3f::x / v.getX(), Vector3f::y / v.getY(), Vector3f::z / v.getZ());
 }
 
-Vector3f Vector3f::div(float v){
+Vector3f Vector3f::div(float v) {
     return Vector3f(Vector3f::x / v, Vector3f::y / v, Vector3f::z / v);
 }

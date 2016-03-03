@@ -15,21 +15,32 @@
 class Shader {
 public:
     Shader();
+
     void bind();
-    void addUniform(const GLchar* uniform);
-    void addVertexShader(const GLchar** source);
-    void addFragmentShader(const GLchar** source);
-    void addGeoShader(const GLchar** source);
+
+    void addUniform(const char *uniform);
+
+    void addVertexShader(const char *source);
+
+    void addFragmentShader(const char *source);
+
+    void addGeoShader(const char *source);
+
     void compileShader();
 
     void setUniformi(std::string uniformName, GLint value);
+
     void setUniformf(std::string uniformName, GLfloat value);
+
     void setUniformv(std::string uniformName, Vector3f value);
+
     void setUniformm(std::string uniformName, Matrix4f value);
+
 private:
     GLuint program;
     std::map<std::string, int> uniforms;
-    void addProgram(const GLchar** source, GLenum pType);
+
+    void addProgram(const char *source, GLenum pType);
 };
 
 

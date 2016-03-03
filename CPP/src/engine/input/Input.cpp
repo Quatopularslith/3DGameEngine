@@ -12,10 +12,10 @@ std::array<Input::States, GLFW_MOUSE_BUTTON_LAST> Input::mButtonState;
 //Keys
 
 void Input::resetStates() {
-    for(int i = 0; i < Input::keyState.size(); i++){
+    for (int i = 0; i < Input::keyState.size(); i++) {
         Input::keyState[i] = Input::Idle;
     }
-    for(int i = 0; i < Input::mButtonState.size(); i++){
+    for (int i = 0; i < Input::mButtonState.size(); i++) {
         Input::mButtonState[i] = Input::Idle;
     }
 }
@@ -36,8 +36,8 @@ bool Input::isKeyHeldDown(int keyCode) {
     return keyState[keyCode] != Input::Release;
 }
 
-void Input::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
-    switch (action){
+void Input::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+    switch (action) {
         case GLFW_REPEAT:
             Input::keyState[key] = Input::Repeat;
             break;
@@ -45,10 +45,10 @@ void Input::key_callback(GLFWwindow* window, int key, int scancode, int action, 
             Input::keyState[key] = Input::Press;
             break;
         case GLFW_RELEASE:
-        Input::keyState[key] = Input::Release;
+            Input::keyState[key] = Input::Release;
             break;
         default:
-        Input::keyState[key] = Input::Idle;
+            Input::keyState[key] = Input::Idle;
             break;
     }
 }
@@ -72,24 +72,24 @@ bool Input::isMButtonHeldDown(int mButtonCode) {
 }
 
 void Input::mButton_callback(GLFWwindow *window, int button, int action, int mods) {
-    switch (action){
+    switch (action) {
         case GLFW_RELEASE:
-        Input::mButtonState[button] = Input::Release;
+            Input::mButtonState[button] = Input::Release;
             break;
         case GLFW_PRESS:
-        Input::mButtonState[button] = Input::Press;
+            Input::mButtonState[button] = Input::Press;
             break;
         case GLFW_REPEAT:
-        Input::mButtonState[button] = Input::Repeat;
+            Input::mButtonState[button] = Input::Repeat;
             break;
         default:
-        Input::mButtonState[button] = Input::Idle;
+            Input::mButtonState[button] = Input::Idle;
             break;
     }
 }
 
 //Mouse Cursor
-Input::CursorPos Input::getCursorPos(){
+Input::CursorPos Input::getCursorPos() {
     Input::CursorPos pos;
     glfwGetCursorPos(Window::window, &pos.x, &pos.y);
     return pos;

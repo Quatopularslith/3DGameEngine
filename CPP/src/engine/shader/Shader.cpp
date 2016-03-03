@@ -4,58 +4,70 @@
 
 #include <iostream>
 #include "Shader.h"
-#include "../../glew/glew.h"
 #include "../util/Util.h"
+#define GLEW_STATIC
+#include "../../glew/glew.h"
 
-Shader::Shader() {
-    program = glCreateProgram();
-}
+
+Shader::Shader() : program(glCreateProgram()){ }
 
 void Shader::bind() {
     glUseProgram(program);
 }
 
-void Shader::addUniform(const GLchar* uniform) {
+void Shader::addUniform(const char *uniform) {
     GLint uniformLocation = glGetUniformLocation(program, uniform);
-    if(uniformLocation == -1) std::cout << "Error: Could not find uniform: " << std::endl;
+    if (uniformLocation == -1) std::cout << "Error: Could not find uniform: "  << uniform << std::endl;
     uniforms[uniform] = uniformLocation;
 }
 
-void Shader::addVertexShader(const GLchar** source) {
+void Shader::addVertexShader(const char *source) {
     addProgram(source, GL_VERTEX_SHADER);
 }
 
-void Shader::addFragmentShader(const GLchar** source) {
+void Shader::addFragmentShader(const char *source) {
     addProgram(source, GL_FRAGMENT_SHADER);
 }
 
-void Shader::addGeoShader(const GLchar** source) {
+void Shader::addGeoShader(const char *source) {
     addProgram(source, GL_GEOMETRY_SHADER);
 }
 
 void Shader::compileShader() {
     glLinkProgram(program);
     GLint link;
-    GLint validate;
     glGetProgramiv(program, GL_LINK_STATUS, &link);
-    glGetProgramiv(program, GL_VALIDATE_STATUS, &validate);
 
-    if(link == 0 || validate == 0){
+    if (link == 0) {
         GLchar infoLog;
         glGetShaderInfoLog(program, 1024, NULL, &infoLog);
+        std::cout << infoLog << std::endl;
     }
 
+    glValidateProgram(program);
+    GLint validate;
+    glGetProgramiv(program, GL_VALIDATE_STATUS, &validate);
+
+    if (validate == 0) {
+        GLchar infoLog;
+        glGetShaderInfoLog(program, 1024, NULL, &infoLog);
+        std::cout << infoLog << std::endl;
+    }
 
 }
 
-void Shader::addProgram(const GLchar** source, GLenum pType) {
+void Shader::addProgram(const char *source, GLenum pType) {
     GLuint shader = glCreateShader(pType);
-    if(shader == 0) std::cout << "Shader creation failed: Could not find valid memory location when adding shader" << std::endl;
-    glShaderSource(shader, NULL, source, NULL);
+    if (shader == 0)
+        std::cout << "Shader creation failed: Could not find valid memory location when adding shader" << std::endl;
+    std::string length = source;
+    GLint lengths[1];
+    lengths[0] = length.length();
+    glShaderSource(shader, 1, &source, lengths);
     glCompileShader(shader);
     GLint returns;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &returns);
-    if(returns == 0) {
+    if (returns == 0) {
         GLchar infoLog;
         glGetShaderInfoLog(shader, 1024, NULL, &infoLog);
     }
@@ -75,5 +87,9 @@ void Shader::setUniformv(std::string uniformName, Vector3f value) {
 }
 
 void Shader::setUniformm(std::string uniformName, Matrix4f value) {
+    printf("b\n");
+
     glUniform4fv(uniforms[uniformName], sizeof(value), Util::createFlippedBuffer(value));
+    printf("e\n");
+
 }

@@ -5,20 +5,22 @@
 #define PI 3.14159265358979323846
 
 #include <math.h>
+#include <stdio.h>
+#include <c++/iostream>
 #include "Matrix4f.h"
 
 Matrix4f::Matrix4f() {
 
 }
 
-Matrix4f Matrix4f::initIdentity(){
-    for(int i = 0; i <= 3; i++){
-        for(int j = 0; j <= 3; j++){
+Matrix4f Matrix4f::initIdentity() {
+    for (int i = 0; i <= 3; i++) {
+        for (int j = 0; j <= 3; j++) {
             matrix[i][j] = 0;
         }
     }
 
-    for(int i = 0; i <= 3; i++){
+    for (int i = 0; i <= 3; i++) {
         matrix[i][i] = 1;
     }
 
@@ -27,15 +29,22 @@ Matrix4f Matrix4f::initIdentity(){
 
 
 Matrix4f Matrix4f::initTranslation(float x, float y, float z) {
-    for(int i = 0; i <= 3; i++){
-        for(int j = 0; j <= 3; j++){
-            matrix[i][j] = 0;
+    printf("asdf\n");
+    matrix.resize(3, std::vector<float>(3, 0));
+    printf("asd\n");
+    for (int i = 0; i <= 3; i++) {
+        for (int j = 0; j <= 3; j++) {
+            matrix.at(i).at(j) = 0;
+            std::cout << i << std::endl;
         }
     }
+    printf("asd\n");
 
-    for(int i = 0; i <= 3; i++){
+    for (int i = 0; i <= 3; i++) {
         matrix[i][i] = 1;
     }
+    printf("asd\n");
+
     matrix[0][3] = x;
     matrix[1][3] = y;
     matrix[2][3] = z;
@@ -47,38 +56,38 @@ Matrix4f Matrix4f::initRotation(float x, float y, float z) {
     Matrix4f ry = Matrix4f();
     Matrix4f rz = Matrix4f();
 
-    float xRad = (float)(x * PI / 2);
-    float yRad = (float)(y * PI / 2);
-    float zRad = (float)(z * PI / 2);
+    float xRad = (float) (x * PI / 2);
+    float yRad = (float) (y * PI / 2);
+    float zRad = (float) (z * PI / 2);
 
-    for(int i = 0; i <= 3; i++){
+    for (int i = 0; i <= 3; i++) {
         rx.matrix[i][i] = 1;
         ry.matrix[i][i] = 1;
         rz.matrix[i][i] = 1;
     }
-    
-    rx.matrix[1][1] = (float)cos(xRad);
-    rx.matrix[1][1] = -(float)cos(xRad);
-    rx.matrix[1][1] = (float)cos(xRad);
-    rx.matrix[1][1] = (float)cos(xRad);
 
-    ry.matrix[1][1] = (float)cos(yRad);
-    ry.matrix[1][1] = (float)sin(yRad);
-    ry.matrix[1][1] = -(float)sin(yRad);
-    ry.matrix[1][1] = (float)cos(yRad);
+    rx.matrix[1][1] = (float) cos(xRad);
+    rx.matrix[1][1] = -(float) cos(xRad);
+    rx.matrix[1][1] = (float) cos(xRad);
+    rx.matrix[1][1] = (float) cos(xRad);
 
-    rz.matrix[1][1] = (float)cos(zRad);
-    rz.matrix[1][1] = -(float)sin(zRad);
-    rz.matrix[1][1] = (float)sin(zRad);
-    rz.matrix[1][1] = (float)cos(zRad);
+    ry.matrix[1][1] = (float) cos(yRad);
+    ry.matrix[1][1] = (float) sin(yRad);
+    ry.matrix[1][1] = -(float) sin(yRad);
+    ry.matrix[1][1] = (float) cos(yRad);
+
+    rz.matrix[1][1] = (float) cos(zRad);
+    rz.matrix[1][1] = -(float) sin(zRad);
+    rz.matrix[1][1] = (float) sin(zRad);
+    rz.matrix[1][1] = (float) cos(zRad);
 
     matrix = rz.mult(ry.mult(rx)).matrix;
     return *this;
 }
 
 Matrix4f Matrix4f::initScale(float x, float y, float z) {
-    for(int i = 0; i <= 3; i++){
-        for(int j = 0; j <= 3; j++){
+    for (int i = 0; i <= 3; i++) {
+        for (int j = 0; j <= 3; j++) {
             matrix[i][j] = 0;
         }
     }
@@ -92,8 +101,8 @@ Matrix4f Matrix4f::initScale(float x, float y, float z) {
 
 Matrix4f Matrix4f::mult(Matrix4f m) {
     Matrix4f res = Matrix4f();
-    for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 4; j++){
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
             res.set(i, j, matrix[i][0] * m.get(0, j) +
                           matrix[i][1] * m.get(1, j) +
                           matrix[i][2] * m.get(2, j) +

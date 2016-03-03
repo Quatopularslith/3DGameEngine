@@ -4,6 +4,7 @@
 
 #include "Quaternion.h"
 #include <math.h>
+
 Quaternion::Quaternion(float x, float y, float z, float w) {
     Quaternion::x = x;
     Quaternion::y = y;
@@ -12,7 +13,7 @@ Quaternion::Quaternion(float x, float y, float z, float w) {
 }
 
 float Quaternion::length() {
-    return (float)sqrt(pow(Quaternion::x, 2) + pow(Quaternion::y, 2) + pow(Quaternion::z, 2) + pow(Quaternion::w, 2));
+    return (float) sqrt(pow(Quaternion::x, 2) + pow(Quaternion::y, 2) + pow(Quaternion::z, 2) + pow(Quaternion::w, 2));
 }
 
 Quaternion Quaternion::normalize() {
@@ -24,11 +25,11 @@ Quaternion Quaternion::normalize() {
     return *this;
 }
 
-Quaternion Quaternion::conjugate(){
+Quaternion Quaternion::conjugate() {
     return Quaternion(-Quaternion::x, -Quaternion::y, -Quaternion::z, w);
 }
 
-Quaternion Quaternion::mult(Quaternion q){
+Quaternion Quaternion::mult(Quaternion q) {
     float w = Quaternion::w * q.getW() - Quaternion::x * q.getX() - Quaternion::y * q.getY() - Quaternion::z * q.getZ();
     float x = Quaternion::x * q.getW() + Quaternion::w * q.getX() + Quaternion::y * q.getZ() - Quaternion::z * q.getY();
     float y = Quaternion::y * q.getW() + Quaternion::w * q.getY() + Quaternion::z * q.getX() - Quaternion::x * q.getZ();

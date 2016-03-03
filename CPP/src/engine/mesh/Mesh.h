@@ -12,8 +12,11 @@
 class Mesh {
 public:
     Mesh();
-    void addVertices(Vertex* vertices, int* indices);
+
+    void addVertices(Vertex *vertices, int *indices);
+
     void draw();
+
 private:
     GLuint vbo;
     GLuint ibo;

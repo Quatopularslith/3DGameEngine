@@ -31,26 +31,23 @@ std::array<GLfloat> Util::createFlippedBuffer(int *vertices) {
     return buffarr;
 }*/
 
-GLfloat* Util::createFlippedBuffer(Matrix4f value) {
+GLfloat *Util::createFlippedBuffer(Matrix4f value) {
     std::vector<GLfloat> buffer;
 
-    for(int i = 0; i <= sizeof(value); i++){
-        for(int j = 0; j <= sizeof(value); j++) {
+    for (int i = 0; i <= sizeof(value); i++) {
+        for (int j = 0; j <= sizeof(value); j++) {
             buffer.push_back(value.get(i, j));
         }
     }
 
-    GLfloat* buffarr;
-    std::copy(buffer.end(), buffer.begin(), &buffarr);
-
-    return buffarr;
+    return buffer.data();
 }
 
 std::vector<std::string> Util::splitString(std::string str, char delimiter) {
     std::vector<std::string> internal;
     std::stringstream ss(str);
     std::string tok;
-    while(std::getline(ss, tok, delimiter)){
+    while (std::getline(ss, tok, delimiter)) {
         internal.push_back(tok);
     }
     return internal;

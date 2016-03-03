@@ -11,10 +11,14 @@
 
 class Transformation {
 public:
+    Transformation();
+
     Vector3f translation;
     Vector3f rotation;
     Vector3f scale;
+
     Matrix4f transformationmatrix();
+
 private:
 };
 

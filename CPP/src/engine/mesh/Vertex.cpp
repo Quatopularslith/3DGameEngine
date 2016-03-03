@@ -3,16 +3,13 @@
 //
 
 #include "Vertex.h"
-#include "../math/Vector3f.h"
 
-Vertex::Vertex(Vector3f pos) {
-    Vertex::pos = pos;
-}
+Vertex::Vertex(Vector3f position) : pos(position){ }
 
 Vector3f Vertex::getPos() {
-    return Vertex::pos;
+    return pos;
 }
 
-void Vertex::setPos(Vector3f pos) {
-    Vertex::pos = pos;
+void Vertex::setPos(Vector3f position) {
+    pos = position;
 }

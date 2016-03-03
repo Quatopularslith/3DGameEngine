@@ -19,7 +19,8 @@ GLFWwindow *Window::createWindow(int width, int height, std::string title, bool 
         Window::setWindowHint(GLFW_GREEN_BITS, vidmode->greenBits);
         Window::setWindowHint(GLFW_BLUE_BITS, vidmode->blueBits);
         Window::setWindowHint(GLFW_REFRESH_RATE, vidmode->refreshRate);
-        Window::window = glfwCreateWindow(vidmode->width, vidmode->height, title.c_str(), glfwGetPrimaryMonitor(), NULL);
+        Window::window = glfwCreateWindow(vidmode->width, vidmode->height, title.c_str(), glfwGetPrimaryMonitor(),
+                                          NULL);
         Window::fullScreen = true;
     } else {
         Window::window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);

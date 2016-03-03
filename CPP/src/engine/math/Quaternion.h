@@ -13,20 +13,31 @@ public:
     Quaternion(float x, float y, float z, float w);
 
     float length();
+
     Quaternion normalize();
+
     Quaternion conjugate();
 
     Quaternion mult(Quaternion q);
+
     Quaternion mult(Vector3f v);
 
     float getX();
+
     void setX(float x);
+
     float getY();
+
     void setY(float y);
+
     float getZ();
+
     void setZ(float z);
+
     float getW();
+
     void setW(float w);
+
 private:
     float x, y, z, w;
 };

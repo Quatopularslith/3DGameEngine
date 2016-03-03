@@ -13,11 +13,12 @@ void Time::setDelta(double delta) {
     Time::delta = delta;
 }
 
-double Time::getDelta(){
+double Time::getDelta() {
     return Time::delta;
 }
 
 long long int Time::getTime() {
-    long long int time = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    long long int time = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            std::chrono::system_clock::now().time_since_epoch()).count();
     return time;
 }

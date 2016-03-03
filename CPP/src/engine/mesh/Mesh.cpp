@@ -10,27 +10,27 @@
 
 Mesh::Mesh() {}
 
-void Mesh::addVertices(Vertex vertices[]){
-    Mesh::size = sizeof(vertices) * Vertex::SIZE;
-    printf("Hi\n");
+void Mesh::addVertices(Vertex* vertices, int* indices){
+    size = sizeof(vertices) * Vertex::SIZE;
 
-    GLuint vbo;
-    glGenBuffers(Mesh::size, &vbo);
-    Mesh::vbo = vbo;
-    printf("Hi\n");
+    glGenBuffers(size, &vbo);
+    glGenBuffers(size, &ibo);
 
-    glBindBuffer(GL_ARRAY_BUFFER, Mesh::vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
 
 void Mesh::draw(){
-
     glEnableVertexAttribArray(0);
-    printf("Hi\n");
-    glBindBuffer(GL_ARRAY_BUFFER, Mesh::vbo);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-    glDrawArrays(GL_TRIANGLES, 0, Mesh::size);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, Vertex::SIZE * 4, (void*)0);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
 
     glDisableVertexAttribArray(0);
 }

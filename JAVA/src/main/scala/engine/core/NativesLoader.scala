@@ -38,10 +38,10 @@ object NativesLoader {
   private val win64 = List(win64Dir + "glfw.dll", win64Dir + "jemalloc.dll", win64Dir + "lwjgl.dll", win64Dir + "OpenAL.dll")
 
   private val lin32Dir = "engine/natives/linux/32/"
-  private val lin32 = List(win32Dir + "libglfw32.so", win32Dir + "libjemalloc32.so", win32Dir + "liblwjgl32.so", win32Dir + "libopenal32.so")
+  private val lin32 = List(lin32Dir + "libglfw32.so", lin32Dir + "libjemalloc32.so", lin32Dir + "liblwjgl32.so", lin32Dir + "libopenal32.so")
 
   private val lin64Dir = "engine/natives/linux/64/"
-  private val lin64 = List(win64Dir + "libglfw.so", win64Dir + "libjemalloc.so", win64Dir + "liblwjgl.so", win64Dir + "libopenal.so")
+  private val lin64 = List(lin64Dir + "libglfw.so", lin64Dir + "libjemalloc.so", lin64Dir + "liblwjgl.so", lin64Dir + "libopenal.so")
 
   private val macDir = "engine/natives/mac/"
   private val mac = List(macDir + "libglfw.dylib", macDir + "libjemalloc.dylib", macDir + "liblwjgl.dylib", macDir + "libopenal.dylib")
@@ -69,8 +69,7 @@ object NativesLoader {
 
   }
 
-  private val destDir = Paths.get("").toAbsolutePath.toString + "/lwjglNatives/"
-  private val files = new ListBuffer[File]
+  private val destDir = Paths.get("").toAbsolutePath.toString + "/natives/"
   private def move(lib: String): String = {
     val source = Channels.newChannel(NativesLoader.getClass.getClassLoader.getResourceAsStream(lib))
     val fileOut = new File(destDir, lib.split('/').last)
@@ -79,14 +78,8 @@ object NativesLoader {
     source.close()
     dest.close()
 
-    fileOut.deleteOnExit()
-    files += fileOut
     println(lib.split('/').last + " loaded")
     fileOut.getAbsolutePath
-  }
-
-  def delete(): Unit ={
-    files.foreach(f => f.delete())
   }
 
 }

@@ -17,7 +17,7 @@ object Util {
   def createFlippedBuffer(vertices: Array[Vertex]): FloatBuffer = {
     val buffer = BufferUtils.createFloatBuffer(vertices.length * Vertex.SIZE)
 
-    for(i <- 0 until vertices.length){
+    for(i <- vertices.indices){
       buffer.put(vertices(i).pos.x)
       buffer.put(vertices(i).pos.y)
       buffer.put(vertices(i).pos.z)

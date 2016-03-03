@@ -25,7 +25,7 @@ object Window {
     title = title1
     if (fullScreen1) {
       val vidmode = glfwGetVideoMode(monitor)
-      window = glfwCreateWindow(vidmode.width(), vidmode.height, title, monitor, null.asInstanceOf[Long])
+      window = glfwCreateWindow(vidmode.width, vidmode.height, title, monitor, null.asInstanceOf[Long])
       fullScreen = true
     } else
       window = glfwCreateWindow(width, height, title, null.asInstanceOf[Long], null.asInstanceOf[Long])

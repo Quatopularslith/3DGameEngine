@@ -23,8 +23,8 @@ object Input {
   val mButtonState: Array[States.States] = new Array[States.States](GLFW_MOUSE_BUTTON_LAST)
 
   def resetStates(): Unit = {
-    for (i <- 0 until keyState.length) keyState(i) = States.Idle
-    for (i <- 0 until mButtonState.length) mButtonState(i) = States.Idle
+    for (i <- keyState.indices) keyState(i) = States.Idle
+    for (i <- mButtonState.indices) mButtonState(i) = States.Idle
   }
 
   //Key Buttons
@@ -68,7 +68,7 @@ object Input {
 
   //Mouse Cursor
 
-  def cursorPos(): Tuple2[Double, Double] = {
+  def cursorPos(): (Double, Double) = {
     val coords = BufferUtils.createDoubleBuffer(2)
     glfwGetCursorPos(Window.window, coords, coords)
     (coords.get(0), coords.get(1))

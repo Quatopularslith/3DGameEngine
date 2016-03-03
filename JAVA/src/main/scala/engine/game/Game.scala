@@ -61,7 +61,8 @@ class Game {
     //uniformFloat = Math.abs(Math.sin(delta)).toFloat
     transform.translation = new Vector3f(sinDelta.toFloat, 0, 0)
     transform.rotation = new Vector3f(0, Math.sin(delta).toFloat * 90, sinDelta.toFloat * 180)
-    transform.scale = new Vector3f((0.7 * sinDelta).toFloat, (0.7 * sinDelta).toFloat, (0.7 * sinDelta).toFloat)
+    transform.scale = new Vector3f((0.5 * sinDelta).toFloat, (0.5 * sinDelta).toFloat, (0.5 * sinDelta).toFloat)
+    //transform.scale = new Vector3f(0.4.toFloat, 0.4.toFloat, 0.4.toFloat)
   }
 
 }

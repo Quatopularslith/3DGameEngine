@@ -7,6 +7,8 @@
 
 
 #include "../mesh/Mesh.h"
+#include "../shader/Shader.h"
+#include "../transformation/Transformation.h"
 
 class Game {
 
@@ -17,6 +19,10 @@ public:
     void update();
 private:
     Mesh mesh;
+    Transformation transform;
+    Shader shader;
+    float delta;
+    float uniformFloat;
 };
 
 

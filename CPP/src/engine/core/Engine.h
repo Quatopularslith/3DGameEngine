@@ -6,6 +6,7 @@
 #define INC_3DGAMEENGINE_ENGINE_H
 
 
+#include <c++/bits/unique_ptr.h>
 #include "../game/Game.h"
 
 class Engine {
@@ -21,7 +22,8 @@ private:
     static void render();
     static void cleanup();
     static void init();
-    static Game game;
+    static Game* game;
+    ~Engine();
 };
 
 

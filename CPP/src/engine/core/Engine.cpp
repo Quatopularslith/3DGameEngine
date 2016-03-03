@@ -20,11 +20,11 @@
 
 bool Engine::running = false;
 int Engine::FPS_CAP = 60;
-Game Engine::game;
+Game* Engine::game;
 
 void Engine::start() { if(!running) run(); }
 
-void Engine::stop() { if(running) Engine::running = false; }
+void Engine::stop() { if(running) running = false; }
 
 void error_callback(int error, const char* description){
     std::cout << "Description: " << description << std::endl << "Error: " << stderr << std::endl;
@@ -36,10 +36,9 @@ void Engine::run() {
     glfwSetErrorCallback(error_callback);
 
     if(glfwInit() != GL_TRUE){
-        std::cout << "GLFW intializum ad aborior" << std::endl;
+        std::cout << "GLFW failed to initialize" << std::endl;
         exit(-1);
     }
-    RenderUtil::initGraphics();
 
     Window::createWindow(1280, 720, "3D Game Engine");
     Window::makeCurrentContext();
@@ -48,15 +47,14 @@ void Engine::run() {
 
     glewExperimental = GL_TRUE;
     if(glewInit() != GLEW_OK){
-        std::cout << "Glew intializum ad aborior" << std::endl;
+        std::cout << "Glew failed to initialize" << std::endl;
         exit(-1);
     }
-    printf("hi\n");
-    Engine::init();
+    init();
 
-    Engine::game = Game();
-printf("hi\n");
-    Engine::loop();
+    game = new Game;
+    RenderUtil::initGraphics();
+    loop();
 }
 
 void Engine::loop() {
@@ -65,11 +63,11 @@ void Engine::loop() {
 
     int frames = 0;
     long long int frameCounter = 0;
-    double frameTime = 1.0 / Engine::FPS_CAP;
+    double frameTime = 1.0 / FPS_CAP;
     long long int lastTime = Time::getTime();
     double unprocessedTime = 0;
 
-    while(Engine::running){
+    while(running){
 
         bool shouldRender = false;
 
@@ -90,8 +88,8 @@ void Engine::loop() {
 
             Time::setDelta(frameTime);
 
-            Engine::game.input();
-            Engine::game.update();
+            game->input();
+            game->update();
 
             if(frameCounter >= Time::NANO_SECOND){
                 std::cout << frames << std::endl;
@@ -112,7 +110,7 @@ void Engine::loop() {
 
 void Engine::render(){
     RenderUtil::clearScreen();
-    Engine::game.render();
+    game->render();
     Window::update();
 }
 
@@ -126,4 +124,8 @@ void Engine::init(){
     glfwSetKeyCallback(Window::window, Input::key_callback);
     glfwSetMouseButtonCallback(Window::window, Input::mButton_callback);
     glfwSetInputMode(Window::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+Engine::~Engine(){
+    delete game;
 }
